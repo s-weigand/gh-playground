@@ -1,0 +1,16 @@
+name: Debug
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    environment: debug
+    steps:
+      - name: Create Artifact
+        run: echo "foo" > artifact.txt
+      - name: Upload  Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-artifact
+          path: artifact.txt
