@@ -1,0 +1,7 @@
+name: Reuse Matrix Workflow
+
+on: [push, pull_request]
+
+jobs:
+  reusable_workflow_job:
+    uses: ./.github/workflows/reusable-workflow.yml
