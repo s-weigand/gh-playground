@@ -1,0 +1,39 @@
+name: Create matrix multistage
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  create_matrix:
+    name: Create run matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.create-matrix.outputs.matrix }}
+    steps:
+      - name: Create Matrix
+        id: create-matrix
+        shell: python
+        run: |
+          import json
+          matrix = {"python-version": ["3.8", "3.9", "3.10"]}
+          print(matrix)
+          print(f"::set-output name=matrix::{json.dumps(matrix)}")
+
+  run_tests:
+    name: Create run matrix
+    needs: [create_matrix]
+    strategy:
+      matrix:
+        matrix: ${{fromJson(needs.create_matrix.outputs.matrix)}}
+        # python-version: [3.8, 3.9, "3.10"]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run tests
+        run: python --version
