@@ -4,4 +4,4 @@ on: [push, pull_request]
 
 jobs:
   reusable_workflow_job:
-    uses: s-weigand/gh-playground/.github/workflows/reusable-workflow.yml@reuse-matrix-workflow
+    uses: ./.github/workflows/reusable-workflow.yml
