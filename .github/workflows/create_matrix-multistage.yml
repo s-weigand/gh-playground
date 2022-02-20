@@ -21,8 +21,23 @@ jobs:
           print(matrix)
           print(f"::set-output name=matrix::{json.dumps(matrix)}")
 
+  show_matrix:
+    name: Show matrix
+    needs: [create_matrix]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install json2yaml
+        run: |
+          sudo npm install -g json2yaml
+      - name: Check matrix definition
+        run: |
+          matrix='${{ needs.create_matrix.outputs.matrix }}'
+          echo $matrix
+          echo $matrix | jq .
+          echo $matrix | json2yaml
+
   run_tests:
-    name: Create run matrix
+    name: Run tests
     needs: [create_matrix]
     strategy:
       matrix:
