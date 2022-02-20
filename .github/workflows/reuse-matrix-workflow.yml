@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: ./.github/workflows/reusable-workflow.yml
+      - uses: s-weigand/gh-playground/.github/workflows/reusable-workflow.yml@reuse-matrix-workflow
