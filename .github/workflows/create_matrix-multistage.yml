@@ -41,7 +41,7 @@ jobs:
     needs: [create_matrix]
     strategy:
       matrix:
-        matrix: ${{fromJson(needs.create_matrix.outputs.matrix)}}
+        ${{fromJson(needs.create_matrix.outputs.matrix)}}
         # python-version: [3.8, 3.9, "3.10"]
     runs-on: ubuntu-latest
     steps:
